@@ -120,20 +120,19 @@ class Calendar(object):
             _index = (self._trade_dates > head_date) & (self._trade_dates < tail_date)
         else:
             raise ValueError("WRONG SELECT TYPE")
-
         return self._trade_dates.loc[_index, :]
 
     def t_ends_between(self, head_date, tail_date, period_type='tail', gap_type='month', gap_len=12):
         """
-
+        提取不同周期的末端 交易日
         :param head_date:
         :param tail_date:
-        :param period_type:
-        :param gap_type:
-        :param gap_len:
+        :param period_type: return date , head / tail of the period
+        :param gap_type: month year week
+        :param gap_len: 间隔数个月
         :return:
         """
-        _between_days = self.t_days_between(head_date = head_date, tail_date=tail_date, select_type="CC")
+        _between_days = self.t_days_between(head_date=head_date, tail_date=tail_date, select_type="CC")
 
         if len(_between_days) <= 1:
             return _between_days
@@ -144,7 +143,27 @@ class Calendar(object):
         else:
             raise ValueError("WRONG GAP TYPE")
 
+        # 取区间首还是区间尾
+        ret_head = period_type == 'head'
+        if ret_head:
+            diff_pos = np.concatenate([[1], np.diff(date_mark) != 0])
+        else:
+            diff_pos = np.concatenate([np.diff(date_mark) != 0, [0]])
+        if gap_len == 1:
+            cut_dates = _between_days[diff_pos > 0]
+        else:
+            mod_val = 1 if ret_head else 0
+            cut_dates = _between_days[((np.cumsum(diff_pos) % gap_len) == mod_val) & (diff_pos > 0)]
 
+        # 加上起始和结束日期
+        first_date = _between_days[0]   # 不一定是head_date
+        last_date = _between_days[-1]   # 不一定是tail_date
+        if cut_dates.shape[0] == 0:     # 可能在取tail的时候出现
+            cut_dates = [first_date, last_date]
+        else:
+            if first_date < cut_dates[0]:
+                cut_dates = np.concatenate([[first_date], cut_dates])
+            if last_date > cut_dates[-1]:
+                cut_dates = np.concatenate([cut_dates, [last_date]])
 
-
-
+        return cut_dates
