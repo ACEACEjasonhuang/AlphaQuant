@@ -9,13 +9,15 @@
 # @Software :PyCharm
 -------------------------------------------------
 """
+# todo: init & _load_trade_date: 多个数据源
+
 import numpy as np
 import pandas as pd
 from functools import partial
+from datetime import datetime
 
 
 class Calendar(object):
-
     _trade_dates = None
     head_date = None
     tail_date = None
@@ -128,7 +130,7 @@ class Calendar(object):
         :param head_date:
         :param tail_date:
         :param period_type: return date , head / tail of the period
-        :param gap_type: month year week
+        :param gap_type: year quarter week
         :param gap_len: 间隔数个月
         :return:
         """
@@ -138,8 +140,13 @@ class Calendar(object):
             return _between_days
         if gap_type == 'year':
             date_mark = np.array([int(_date[:4]) for _date in _between_days])
+        elif gap_type == 'quarter':
+            date_mark = np.array([(int(_date[4:6]) - 1) // 3 for _date in _between_days])
         elif gap_type == 'month':
             date_mark = np.array([int(_date[4:6]) for _date in _between_days])
+        elif gap_type == 'week':
+            # 返回周序号
+            date_mark = np.array([int(datetime.strptime(_date, '%Y%m%d').strftime("%W")) for _date in _between_days])
         else:
             raise ValueError("WRONG GAP TYPE")
 

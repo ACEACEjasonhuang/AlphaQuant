@@ -97,18 +97,20 @@ class Calculator(object):
 
     @classmethod
     def test1(cls, a, b):
-        np.array([np.sum()])
-        return a
+
+        from datetime import datetime
+        return list(map(lambda _date: int(datetime.strptime(_date, '%Y%m%d').strftime("%W")), a))
+
 
     @classmethod
     def test2(cls, a, b):
-        a[a < 0.5] = 0
-        return a
-
-
+        from datetime import datetime
+        return [int(datetime.strptime(_date, '%Y%m%d').strftime("%W")) for _date in a]
 
 
 if __name__ == "__main__":
-    a = pd.Series(np.random.random(10000000))
-    b = pd.Series(np.random.random(10000000))
+    # a = pd.Series(np.random.random(10000000))
+    # b = pd.Series(np.random.random(10000000))
+    # Calculator.test_time(Calculator.test1, Calculator.test2, a, b)
+    a = b = ['20211231'] * 500000
     Calculator.test_time(Calculator.test1, Calculator.test2, a, b)
