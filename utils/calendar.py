@@ -28,6 +28,8 @@ class Calendar(object):
             pass
         elif self._data_source == 'h5':
             pass
+        elif self._data_source == 'tushare':
+            pass
         else:
             raise ValueError('Wrong Data Source {}'.format(self._data_source))
 
@@ -42,6 +44,8 @@ class Calendar(object):
             if self._data_source == 'wind':
                 pass
             elif self._data_source == 'h5':
+                pass
+            elif self._data_source == 'tushare':
                 pass
             else:
                 raise ValueError('Wrong Data Source {}'.format(self._data_source))

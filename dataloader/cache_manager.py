@@ -10,6 +10,7 @@
 -------------------------------------------------
 """
 
+
 class CacheManager(object):
     _tableSaved = {}        # 存储DataFrame
     _fieldsSaves = {}       # 记录各表已缓存字段
