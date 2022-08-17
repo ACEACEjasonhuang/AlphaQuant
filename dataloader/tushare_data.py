@@ -112,4 +112,12 @@ class DataLoaderTuShare(object):
 if __name__ == '__main__':
     ts_token = '9f22d4042f10a22eb142bef09a1b31e8d6807f276d902863fe771167'
     loader = DataLoaderTuShare(ts_token)
-    print(loader.get_history_daily_data(['000001.SZ', '000002.SZ']))
+    # print(loader.get_history_daily_data(['000001.SZ', '000002.SZ']))
+    import os
+    import configparser as cp
+    print(__file__)
+    upper_path, _file = os.path.split(os.path.realpath(__file__))
+    module_path, _ = os.path.split(upper_path)
+    cfp = cp.ConfigParser()
+    cfp.read(os.path.join(module_path, 'configs', 'token.ini'))
+    print(dict(cfp.items("token")))
