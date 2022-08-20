@@ -12,7 +12,8 @@
 import os
 import configparser as cp
 from utils.calendar import Calendar
-from dataloader.tushare_data import DataLoaderTuShare
+from tushare_dataloader.tushare_data import DataLoaderTuShare
+
 
 class CacheManager(object):
     _table_saved = {}        # 存储DataFrame
@@ -20,7 +21,8 @@ class CacheManager(object):
     _fields_index = {}       # 记录每个字段对应的index
     _fields_stock_count = {}      # 记录每个字段对应的 日期 股票数量 dataFrame，应该为
     _calendar = None        #
-    _stockCounts = None     # 所有日期 股票 对组合
+    _stock_counts = None     # 所有日期 股票 对组合
+    # 日期和股票数量的dataFrame
 
     def __init__(self, cache_level=1, data_source='tushare'):
         """
@@ -36,7 +38,7 @@ class CacheManager(object):
         if self._data_source == 'h5':
             pass
         elif self._data_source == 'tushare':
-            cfp.read(os.path.join(_upper_path, 'configs', 'token.ini'))
+            cfp.read(os.path.join(_module_path, 'configs', 'token.ini'))
             _token = dict(cfp.items("token"))
             self.ts_loader = DataLoaderTuShare(_token['default_token'])
         elif self._data_source == 'wind':
@@ -48,7 +50,8 @@ class CacheManager(object):
         self._cache_calendar()
         self._cache_stock_counts()
 
-    def _cache_calendar(self):
+    @classmethod
+    def _cache_calendar(cls):
         """
         初始化类日期模块
         :return:
@@ -61,5 +64,13 @@ class CacheManager(object):
         初始化类股票计数器
         :return:
         """
-        pass
+        if CacheManager._stock_counts is None:
+            if self._data_source == 'tushare':
+                pass
+
+
+
+
+
+
 

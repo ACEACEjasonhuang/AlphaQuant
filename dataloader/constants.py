@@ -35,13 +35,12 @@ class Base(object):
         return list(_dict.values())
 
 
-
 class DefaultTime(Base):
     DEFAULT_START_TIME = '20001201'
     DEFAULT_END_TIME = '20211231'
 
 
-class SaveDataDaily(Base):
+class SaveStockDataDaily(Base):
     TRADE_DT = 'TRADE_DT'
     STOCK_CODE = 'STOCK_CODE'
     OPEN = 'OPEN'
@@ -55,7 +54,7 @@ class SaveDataDaily(Base):
     AMOUNT = 'AMOUNT'
 
 
-class TuShareDataDaily(Base):
+class TuShareStockDataDaily(Base):
     TRADE_DT = 'trade_date'
     STOCK_CODE = 'ts_code'
     OPEN = 'open'
@@ -69,5 +68,30 @@ class TuShareDataDaily(Base):
     AMOUNT = 'amount'
 
 
+class TuShareStockBasic(Base):
+    STOCK_CODE = 'ts_code'
+    STOCK_NAME = 'name'
+    AREA = 'area'
+    INDUSTRY = 'industry'
+    STOCK_FULLNAME = 'fullname'
+    MARKET_TYPE = 'market'
+    EXCHANGE = 'exchange'
+    CURRENT_TYPE = 'curr_type'
+    LIST_STATUS = 'list_status'
+    LIST_DATE = 'list_date'
+    DELIST_DATE = 'delist_date'
+    IS_HS = 'is_hs'
+
+
+class TuShareCalendar(Base):
+    EXCHANGE = 'exchange'
+    START_DATE = 'start_date'
+    END_DATE = 'end_date'
+    IS_OPEN = 'is_open'
+    CAL_DATE = 'cal_date'
+    PRE_TRADE_DATE = 'pretrade_date'
+
+
+
 if __name__ == "__main__":
-    print(TuShareDataDaily.get_values())
+    print(TuShareStockDataDaily.get_values())

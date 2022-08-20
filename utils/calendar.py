@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 from functools import partial
 from datetime import datetime
+from tushare_dataloader.tushare_data import DataLoaderTuShare
 
 
 class Calendar(object):
@@ -29,7 +30,7 @@ class Calendar(object):
         elif self._data_source == 'h5':
             pass
         elif self._data_source == 'tushare':
-            pass
+            self._loader = DataLoaderTuShare()
         else:
             raise ValueError('Wrong Data Source {}'.format(self._data_source))
 

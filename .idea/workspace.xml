@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7df1a5cc-49ac-4def-8462-f432076800b0" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/factor_module/factor_base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/factor_module/factor_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/token.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configs/token.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataloader/cache_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataloader/cache_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataloader/tushare_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataloader/tushare_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataloader/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataloader/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataloader/tushare_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/tushare_dataloader/tushare_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/factor_module/factor_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/factor_module/factor_base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/calendar.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/calendar.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +45,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tushare_dataloader" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\project\AlphaQuant\tushare_dataloader" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.tushare_data (1)">
     <configuration name="calculator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -115,7 +120,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tushare_data (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="tushare_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AlphaQuant" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -128,7 +133,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataloader/tushare_data.py" />
+      <option name="SCRIPT_NAME" value="D:\project\AlphaQuant\tushare_dataloader\tushare_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -150,7 +155,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\project\AlphaQuant\dataloader\tushare_data.py" />
+      <option name="SCRIPT_NAME" value="D:\project\AlphaQuant\tushare_dataloader\tushare_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -162,7 +167,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.tushare_data (1)" />
-        <item itemvalue="Python.tushare_data_new" />
         <item itemvalue="Python.constants" />
         <item itemvalue="Python.calculator" />
       </list>
@@ -187,7 +191,8 @@
       <workItem from="1660046394269" duration="6910000" />
       <workItem from="1660119919093" duration="20595000" />
       <workItem from="1660283072339" duration="14780000" />
-      <workItem from="1660422359040" duration="36073000" />
+      <workItem from="1660422359040" duration="36872000" />
+      <workItem from="1660726836044" duration="29751000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <created>1660159187130</created>
@@ -210,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660548021663</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Changes">
+      <created>1660711837144</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1660711837144</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,21 +244,10 @@
     <MESSAGE value="Changes" />
     <option name="LAST_COMMIT_MESSAGE" value="Changes" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/utils/calendar.py</url>
-          <line>13</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AlphaQuant$tushare_data_new.coverage" NAME="tushare_data Coverage Results" MODIFIED="1660564719860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
     <SUITE FILE_PATH="coverage/AlphaQuant$constants.coverage" NAME="constants Coverage Results" MODIFIED="1660296540400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
-    <SUITE FILE_PATH="coverage/AlphaQuant$tushare_data__1_.coverage" NAME="tushare_data (1) Coverage Results" MODIFIED="1660570077315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
+    <SUITE FILE_PATH="coverage/AlphaQuant$tushare_data__1_.coverage" NAME="tushare_data (1) Coverage Results" MODIFIED="1660820562999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
     <SUITE FILE_PATH="coverage/AlphaQuant$calculator.coverage" NAME="calculator Coverage Results" MODIFIED="1660294725778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/calculator_module" />
   </component>
 </project>

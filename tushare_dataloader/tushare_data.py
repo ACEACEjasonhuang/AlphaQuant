@@ -14,16 +14,24 @@ import time
 import pandas as pd
 import tushare as ts
 from functools import wraps
-from constants import TuShareDataDaily, DefaultTime, SaveDataDaily
+from dataloader.constants import TuShareStockDataDaily, DefaultTime, SaveStockDataDaily
 from utils.date_module import DateTools
+import configparser as cp
+import os
 
 
 class DataLoaderTuShare(object):
-    def __init__(self, ts_token):
+    def __init__(self, ts_token=None):
         """
-
-        :param ts_token: tushare token
+        :param ts_token: tushare token 默认读取配置文件
         """
+        if ts_token is None:
+            # 读取配置文件中的token
+            _upper_path, _file = os.path.split(os.path.realpath(__file__))
+            _module_path, _ = os.path.split(_upper_path)
+            cfp = cp.ConfigParser()
+            cfp.read(os.path.join(_upper_path, 'configs', 'token.ini'))
+            ts_token = dict(cfp.items("token"))
         self._ts = ts
         self._ts.set_token(ts_token)
         self.pro = ts.pro_api(ts_token)
@@ -82,12 +90,12 @@ class DataLoaderTuShare(object):
             start_time = self._default_start_time
         if not end_time:
             end_time = self._default_end_time
-        default_field = TuShareDataDaily.get_values()
-        _dict_ts = TuShareDataDaily.get_attr()
-        _dict_save = SaveDataDaily.get_attr()
+        default_field = TuShareStockDataDaily.get_values()
+        _dict_ts = TuShareStockDataDaily.get_attr()
+        _dict_save = SaveStockDataDaily.get_attr()
         _field_map = {_dict_ts[i]: _dict_save[i] for i in _dict_ts}
 
-        time_col = TuShareDataDaily.TRADE_DT
+        time_col = TuShareStockDataDaily.TRADE_DT
         if isinstance(code, str):
             code = [code]
         __df_set = []
@@ -105,19 +113,40 @@ class DataLoaderTuShare(object):
         __res = pd.concat(__df_set)
         __res.reset_index(drop=True, inplace=True)
         __res.rename(columns=_field_map, inplace=True)
-        __res.set_index([SaveDataDaily.TRADE_DT, SaveDataDaily.STOCK_CODE], inplace=True)
+        __res.set_index([SaveStockDataDaily.TRADE_DT, SaveStockDataDaily.STOCK_CODE], inplace=True)
         return __res
+
+    def get_stock_basic(self, ts_code=None, is_hs=None, list_status=None, exchange=None, market=None):
+        """
+
+        :param ts_code: 股票代码
+        :param is_hs: 是否沪深股票
+        :param list_status: 上市状态
+        :param exchange: 交易所
+        :param market: 市场
+        :return:
+        """
+        _data = self.pro.stock_basic(ts_code=ts_code, is_hs=is_hs, list_status=list_status,
+                                     exchange=exchange, market=market,
+                                     fields='ts_code,name,industry,market,exchange,is_hs,list_date,delist_date')
+        return _data
+
+    def get_calendar(self, exchange=None, start_date='20000101', end_date='20991231'):
+        return self.pro.trade_cal(exchange=exchange, start_date=start_date, end_date=end_date, is_open='1')
+
+    def test(self):
+        """
+        测试单元
+        :return:
+        """
+        __res = self.get_stock_basic()
+        print(__res)
 
 
 if __name__ == '__main__':
-    ts_token = '9f22d4042f10a22eb142bef09a1b31e8d6807f276d902863fe771167'
-    loader = DataLoaderTuShare(ts_token)
+    _token = '9f22d4042f10a22eb142bef09a1b31e8d6807f276d902863fe771167'
+    loader = DataLoaderTuShare(_token)
+    loader.test()
     # print(loader.get_history_daily_data(['000001.SZ', '000002.SZ']))
-    import os
-    import configparser as cp
-    print(__file__)
-    upper_path, _file = os.path.split(os.path.realpath(__file__))
-    module_path, _ = os.path.split(upper_path)
-    cfp = cp.ConfigParser()
-    cfp.read(os.path.join(module_path, 'configs', 'token.ini'))
-    print(dict(cfp.items("token")))
+
+
