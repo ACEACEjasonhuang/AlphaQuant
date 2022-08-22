@@ -1,2 +1,2 @@
 # AlphaQuant
-a framework for favtor seeking and testing 
+a framework for factor seeking and testing 
