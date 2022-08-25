@@ -12,11 +12,13 @@
 from math import ceil
 import time
 import pandas as pd
+import numpy as np
 import tushare as ts
 from functools import wraps
 from dataloader.constants import TuShareStockDataDaily, DefaultTime, SaveStockDataDaily, SaveDataSet
 from utils.date_module import DateTools
 import configparser as cp
+from collections import Counter
 import os
 
 
@@ -133,20 +135,38 @@ class DataLoaderTuShare(object):
     def get_calendar(self, exchange=None, start_date='20000101', end_date='20991231'):
         return self.pro.trade_cal(exchange=exchange, start_date=start_date, end_date=end_date, is_open='1')
 
-    def get_stock_number(self, to_h5=True):
-
+    def get_stock_number(self, save_to_h5=False):
+        """
+        获取当天上市股票总数
+        :param save_to_h5:
+        :return:
+        """
         _upper_path, _file = os.path.split(os.path.realpath(__file__))
         _module_path, _ = os.path.split(_upper_path)
         cfp = cp.ConfigParser()
         cfp.read(os.path.join(_module_path, 'configs', 'data_path.ini'))
         _relative_data_path = dict(cfp.items("data"))
         _real_data_path = os.path.join(_module_path, _relative_data_path['constants'],
-                                       SaveDataSet.STOCK_DAILY_COUNT, '.h5')
-        if os.path.exists(_real_data_path):
-            pass
+                                       '{}{}'.format(SaveDataSet.STOCK_DAILY_COUNT, '.h5'))
 
-        else:
-            pass
+        # 根据股票上市和退市日期，获取当日上市总股票数量
+        _calendar = self.get_calendar()
+        _start_date, _end_date = min(_calendar['cal_date']), max(_calendar['cal_date'])
+        _stk_basic = self.get_stock_basic()
+        _list_date = _stk_basic['list_date']
+        _list_date = np.where(_list_date <= _start_date, _start_date, _list_date)
+        _ser_list_date = pd.Series(dict(Counter(_list_date)))
+        _delist_date = _stk_basic[_stk_basic['delist_date'].notna()]
+        _delist_date = np.where(_delist_date <= _start_date, _start_date, _delist_date)
+        _ser_delist_date = pd.Series(dict(Counter(_delist_date)))
+        _temp_df = pd.DataFrame({'list_number': _ser_list_date, 'delist_number': _ser_delist_date}).fillna(0).cumsum()
+        _stk_number = pd.DataFrame(index=_calendar['cal_date'])
+        _stk_number[SaveDataSet.STOCK_DAILY_COUNT] = (_temp_df['list_number'] - _temp_df['delist_number']).astype(int)
+        _stk_number.fillna(method='ffill', inplace=True)
+
+        if save_to_h5:
+            _stk_number.to_hdf(path_or_buf=_real_data_path, mode='w', key=SaveDataSet.STOCK_DAILY_COUNT)
+        return _stk_number
 
 
     def test(self):
@@ -154,7 +174,7 @@ class DataLoaderTuShare(object):
         测试单元
         :return:
         """
-        __res = self.get_stock_number()
+        __res = self.get_stock_number(save_to_h5=True)
         print(__res)
 
 

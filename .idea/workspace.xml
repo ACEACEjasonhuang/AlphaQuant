@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7df1a5cc-49ac-4def-8462-f432076800b0" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configs/data_path.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configs/data_path.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataloader/cache_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataloader/cache_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataloader/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataloader/constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tushare_dataloader/tushare_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/tushare_dataloader/tushare_data.py" afterDir="false" />
     </list>
@@ -52,8 +50,8 @@
       <recent name="D:\project\AlphaQuant\tushare_dataloader" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.cache_manager">
-    <configuration name="cache_manager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.tushare_data (1)">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="AlphaQuant" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -61,14 +59,14 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/dataloader" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataloader/cache_manager.py" />
+      <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -209,7 +207,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.cache_manager" />
         <item itemvalue="Python.tushare_data (1)" />
         <item itemvalue="Python.constants" />
         <item itemvalue="Python.calculator" />
@@ -237,8 +234,6 @@
       <workItem from="1660283072339" duration="14780000" />
       <workItem from="1660422359040" duration="36872000" />
       <workItem from="1660726836044" duration="29751000" />
-      <workItem from="1661153390675" duration="12169000" />
-      <workItem from="1661236943117" duration="2303000" />
     </task>
     <task id="LOCAL-00001" summary="Changes">
       <created>1660159187130</created>
@@ -290,12 +285,18 @@
     <MESSAGE value="Changes" />
     <option name="LAST_COMMIT_MESSAGE" value="Changes" />
   </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/tushare_dataloader/tushare_data.py" line="158">
+        <watch expression="_delist_date" language="Python" />
+      </inline-watch>
+    </watches-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/AlphaQuant$calculator.coverage" NAME="calculator Coverage Results" MODIFIED="1660294725778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/calculator_module" />
+    <SUITE FILE_PATH="coverage/AlphaQuant$main.coverage" NAME="main Coverage Results" MODIFIED="1661461546370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AlphaQuant$tushare_data_new.coverage" NAME="tushare_data Coverage Results" MODIFIED="1660564719860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
     <SUITE FILE_PATH="coverage/AlphaQuant$constants.coverage" NAME="constants Coverage Results" MODIFIED="1660296540400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
-    <SUITE FILE_PATH="coverage/AlphaQuant$main.coverage" NAME="main Coverage Results" MODIFIED="1661153845841" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/AlphaQuant$tushare_data__1_.coverage" NAME="tushare_data (1) Coverage Results" MODIFIED="1661176180589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tushare_dataloader" />
-    <SUITE FILE_PATH="coverage/AlphaQuant$cache_manager.coverage" NAME="cache_manager Coverage Results" MODIFIED="1661177531837" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataloader" />
+    <SUITE FILE_PATH="coverage/AlphaQuant$tushare_data__1_.coverage" NAME="tushare_data (1) Coverage Results" MODIFIED="1661465019647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tushare_dataloader" />
+    <SUITE FILE_PATH="coverage/AlphaQuant$calculator.coverage" NAME="calculator Coverage Results" MODIFIED="1660294725778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/calculator_module" />
   </component>
 </project>

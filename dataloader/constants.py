@@ -41,7 +41,7 @@ class DefaultTime(Base):
 
 
 class SaveDataSet(Base):
-    STOCK_DAILY_COUNT = 'STOCK_DAILY_COUNT'
+    STOCK_DAILY_COUNT = 'stock_daily_count'
 
 
 class SaveStockDataDaily(Base):
