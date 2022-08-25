@@ -40,6 +40,10 @@ class DefaultTime(Base):
     DEFAULT_END_TIME = '20211231'
 
 
+class SaveDataSet(Base):
+    STOCK_DAILY_COUNT = 'STOCK_DAILY_COUNT'
+
+
 class SaveStockDataDaily(Base):
     TRADE_DT = 'TRADE_DT'
     STOCK_CODE = 'STOCK_CODE'

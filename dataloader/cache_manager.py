@@ -13,6 +13,7 @@ import os
 import configparser as cp
 from utils.calendar import Calendar
 from tushare_dataloader.tushare_data import DataLoaderTuShare
+from constants import SaveDataSet
 
 
 class CacheManager(object):
@@ -66,9 +67,23 @@ class CacheManager(object):
         """
         if CacheManager._stock_counts is None:
             if self._data_source == 'tushare':
+                CacheManager._stock_counts = self.ts_loader.get_stock_number()
+
+
+
+
+
+
+
+
+
+
+
                 pass
 
 
+if __name__ == "__main__":
+    cm = CacheManager()
 
 
 

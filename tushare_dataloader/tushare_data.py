@@ -14,7 +14,7 @@ import time
 import pandas as pd
 import tushare as ts
 from functools import wraps
-from dataloader.constants import TuShareStockDataDaily, DefaultTime, SaveStockDataDaily
+from dataloader.constants import TuShareStockDataDaily, DefaultTime, SaveStockDataDaily, SaveDataSet
 from utils.date_module import DateTools
 import configparser as cp
 import os
@@ -69,7 +69,7 @@ class DataLoaderTuShare(object):
                                    end_date=_end,
                                    *args,
                                    **kwargs
-                                    ) for _start, _end in split_year(start_time, end_time, gap_year)]
+                                   ) for _start, _end in split_year(start_time, end_time, gap_year)]
 
         __res = pd.concat(_temp1)
         return __res
@@ -118,7 +118,6 @@ class DataLoaderTuShare(object):
 
     def get_stock_basic(self, ts_code=None, is_hs=None, list_status=None, exchange=None, market=None):
         """
-
         :param ts_code: 股票代码
         :param is_hs: 是否沪深股票
         :param list_status: 上市状态
@@ -134,12 +133,28 @@ class DataLoaderTuShare(object):
     def get_calendar(self, exchange=None, start_date='20000101', end_date='20991231'):
         return self.pro.trade_cal(exchange=exchange, start_date=start_date, end_date=end_date, is_open='1')
 
+    def get_stock_number(self, to_h5=True):
+
+        _upper_path, _file = os.path.split(os.path.realpath(__file__))
+        _module_path, _ = os.path.split(_upper_path)
+        cfp = cp.ConfigParser()
+        cfp.read(os.path.join(_module_path, 'configs', 'data_path.ini'))
+        _relative_data_path = dict(cfp.items("data"))
+        _real_data_path = os.path.join(_module_path, _relative_data_path['constants'],
+                                       SaveDataSet.STOCK_DAILY_COUNT, '.h5')
+        if os.path.exists(_real_data_path):
+            pass
+
+        else:
+            pass
+
+
     def test(self):
         """
         测试单元
         :return:
         """
-        __res = self.get_stock_basic()
+        __res = self.get_stock_number()
         print(__res)
 
 
@@ -148,5 +163,3 @@ if __name__ == '__main__':
     loader = DataLoaderTuShare(_token)
     loader.test()
     # print(loader.get_history_daily_data(['000001.SZ', '000002.SZ']))
-
-
