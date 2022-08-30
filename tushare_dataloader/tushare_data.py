@@ -17,6 +17,7 @@ import tushare as ts
 from functools import wraps
 from dataloader.constants import TuShareStockDataDaily, DefaultTime, SaveStockDataDaily, SaveDataSet
 from utils.date_module import DateTools
+from utils.io_module import IoModule
 import configparser as cp
 from collections import Counter
 import os
@@ -32,8 +33,8 @@ class DataLoaderTuShare(object):
             _upper_path, _file = os.path.split(os.path.realpath(__file__))
             _module_path, _ = os.path.split(_upper_path)
             cfp = cp.ConfigParser()
-            cfp.read(os.path.join(_upper_path, 'configs', 'token.ini'))
-            ts_token = dict(cfp.items("token"))
+            cfp.read(os.path.join(_module_path, 'configs', 'token.ini'))
+            ts_token = dict(cfp.items("token"))['default_token']
         self._ts = ts
         self._ts.set_token(ts_token)
         self.pro = ts.pro_api(ts_token)
@@ -141,13 +142,6 @@ class DataLoaderTuShare(object):
         :param save_to_h5:
         :return:
         """
-        _upper_path, _file = os.path.split(os.path.realpath(__file__))
-        _module_path, _ = os.path.split(_upper_path)
-        cfp = cp.ConfigParser()
-        cfp.read(os.path.join(_module_path, 'configs', 'data_path.ini'))
-        _relative_data_path = dict(cfp.items("data"))
-        _real_data_path = os.path.join(_module_path, _relative_data_path['constants'],
-                                       '{}{}'.format(SaveDataSet.STOCK_DAILY_COUNT, '.h5'))
 
         # 根据股票上市和退市日期，获取当日上市总股票数量
         _calendar = self.get_calendar()
@@ -161,13 +155,15 @@ class DataLoaderTuShare(object):
         _ser_delist_date = pd.Series(dict(Counter(_delist_date)))
         _temp_df = pd.DataFrame({'list_number': _ser_list_date, 'delist_number': _ser_delist_date}).fillna(0).cumsum()
         _stk_number = pd.DataFrame(index=_calendar['cal_date'])
-        _stk_number[SaveDataSet.STOCK_DAILY_COUNT] = (_temp_df['list_number'] - _temp_df['delist_number']).astype(int)
-        _stk_number.fillna(method='ffill', inplace=True)
+        _stk_number[SaveDataSet.STOCK_DAILY_COUNT] = _temp_df['list_number'] - _temp_df['delist_number']
+        _stk_number[SaveDataSet.STOCK_DAILY_COUNT] = _stk_number[SaveDataSet.STOCK_DAILY_COUNT]\
+            .fillna(method='ffill').astype(int)
 
         if save_to_h5:
+            _real_data_path = os.path.join(IoModule.get_path('data', 'constants'),
+                                           '{}{}'.format(SaveDataSet.STOCK_DAILY_COUNT, '.h5'))
             _stk_number.to_hdf(path_or_buf=_real_data_path, mode='w', key=SaveDataSet.STOCK_DAILY_COUNT)
         return _stk_number
-
 
     def test(self):
         """

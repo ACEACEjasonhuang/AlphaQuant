@@ -96,6 +96,10 @@ class TuShareCalendar(Base):
     PRE_TRADE_DATE = 'pretrade_date'
 
 
+cache_levels = {
+    1: ['']
+}
+
 
 if __name__ == "__main__":
     print(TuShareStockDataDaily.get_values())
